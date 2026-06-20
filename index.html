@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogos Flexi 2026 — Demank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B2D3A;
+      --red:    #D81F2C;
+      --teal:   #0E8C7A;
+      --blue:   #1B6FB5;
+      --amber:  #92400e;
+      --bg:     #F0EEE9;
+      --white:  #FFFFFF;
+      --muted:  #6B7E8A;
+      --border: #DDD9D3;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 2.75rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: 'FLEXI';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(7rem, 22vw, 16rem);
+      font-weight: 700;
+      color: rgba(255,255,255,0.03);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: 0.15em;
+      user-select: none;
+    }
+
+    .hero-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.75rem;
+      position: relative;
+    }
+
+    .hero-logos img { height: 44px; width: auto; object-fit: contain; }
+
+    .hero-divider {
+      width: 1px; height: 32px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      position: relative;
+    }
+
+    .hero-sub {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      position: relative;
+    }
+
+    .hero-rule {
+      display: block;
+      width: 2rem; height: 2px;
+      background: var(--red);
+      margin: 1.5rem auto 0;
+      position: relative;
+    }
+
+    /* ── GRID ── */
+    .main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.875rem;
+      margin-bottom: 0.875rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 1.75rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      border: 1.5px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent, var(--navy));
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.22s ease;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .card:hover {
+      border-color: var(--accent, var(--navy));
+      box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+
+    .card:hover::after { transform: scaleY(1); }
+
+    .card-tag {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent, var(--navy));
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-count {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--navy);
+      opacity: 0.38;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--accent, var(--navy));
+      margin-top: 0.2rem;
+      letter-spacing: 0.03em;
+    }
+
+    .card-cta svg { transition: transform 0.15s; }
+    .card:hover .card-cta svg { transform: translateX(4px); }
+
+    /* ── COMPLETO (full-width dark card) ── */
+    .card-full {
+      --accent: var(--red);
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 2rem;
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+
+    .card-full::after { background: var(--red); }
+
+    .card-full .card-name  { color: #fff; font-size: clamp(1.1rem, 2vw, 1.35rem); }
+    .card-full .card-tag   { color: rgba(255,255,255,0.45); }
+    .card-full .card-desc  { color: rgba(255,255,255,0.55); font-size: 0.8rem; }
+    .card-full .card-count { color: rgba(255,255,255,0.3); opacity: 1; }
+    .card-full .card-cta   { color: var(--red); }
+
+    .card-full:hover {
+      border-color: var(--red);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.2);
+    }
+
+    .card-full-content { flex: 1; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .card-full-arrow {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.18s, background 0.18s;
+    }
+
+    .card-full:hover .card-full-arrow {
+      border-color: var(--red);
+      background: var(--red);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.25rem 1rem 2rem;
+      font-size: 0.74rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    footer a { color: var(--navy); text-decoration: none; font-weight: 500; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero-logos img { height: 36px; }
+      .card-full { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem; }
+      .card-full-arrow { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card, .card::after, .card-cta svg, .card-full-arrow { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-logos">
+    <img src="logo-demank.png" alt="Demank">
+    <div class="hero-divider"></div>
+    <img src="logo-flexi.png" alt="Flexi">
+  </div>
+  <h1>Catálogos Temporada 2026</h1>
+  <p class="hero-sub">Otoño · Invierno &nbsp;·&nbsp; Distribuidor Autorizado</p>
+  <span class="hero-rule"></span>
+</header>
+
+<main class="main">
+  <p class="section-label">Selecciona un catálogo</p>
+
+  <div class="grid">
+
+    <a class="card" href="flexi.html" style="--accent:var(--red)">
+      <span class="card-tag">Línea principal</span>
+      <span class="card-name">Flexi<br>Dama &amp; Caballero</span>
+      <span class="card-desc">Calzado de moda para adulto — temporada Otoño Invierno 2026.</span>
+      <span class="card-count">93 modelos</span>
+      <span class="card-cta">Ver catálogo
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="escolar.html" style="--accent:var(--blue)">
+      <span class="card-tag">Línea infantil</span>
+      <span class="card-name">Flexi<br>Escolar</span>
+      <span class="card-desc">Calzado para niño y niña — resistente y cómodo para el regreso a clases.</span>
+      <span class="card-count">27 modelos</span>
+      <span class="card-cta">Ver catálogo
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="pro.html" style="--accent:var(--amber)">
+      <span class="card-tag">Industrial</span>
+      <span class="card-name">Flexi<br>PRO</span>
+      <span class="card-desc">Calzado de protección y trabajo — normativa industrial, confort de jornada larga.</span>
+      <span class="card-count">15 modelos · Dama y Caballero</span>
+      <span class="card-cta">Ver catálogo
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+    <a class="card" href="salud.html" style="--accent:var(--teal)">
+      <span class="card-tag">Sector salud</span>
+      <span class="card-name">Flexi<br>Salud</span>
+      <span class="card-desc">Calzado blanco para personal médico y hospitalario — antideslizante y antifatiga.</span>
+      <span class="card-count">13 modelos · Dama y Caballero</span>
+      <span class="card-cta">Ver catálogo
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+
+    <a class="card card-full" href="completo.html">
+      <div class="card-full-content">
+        <span class="card-tag">Colección completa</span>
+        <span class="card-name">Catálogo Completo 2026</span>
+        <span class="card-desc">Todos los modelos en un solo lugar — Flexi, Escolar, PRO y Salud.</span>
+        <span class="card-count">135 modelos</span>
+        <span class="card-cta">Ver catálogo completo
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+      <div class="card-full-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  Demank &nbsp;·&nbsp; Distribuidor Autorizado Flexi &nbsp;·&nbsp;
+  <a href="mailto:distribuidor.calzado1@gmail.com">distribuidor.calzado1@gmail.com</a>
+  &nbsp;·&nbsp; +52 442 226 4934
+</footer>
+
+</body>
+</html>
